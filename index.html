@@ -1,0 +1,351 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="บริการจองล่องแพเขื่อนแม่สรวย เชียงราย บรรยากาศดี อาหารอร่อย ราคาเป็นกันเอง">
+    <title>พาเพลินแพเปียกลำน้ำแม่สรวย - Pa Plearn Wet Rafting</title>
+    <link rel="icon" type="image/png" href="https://i.postimg.cc/VsTXQYJL/d-sin-th-y-ngmi-di-t-ngch-x-(15).png">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+    <script src="https://npmcdn.com/flatpickr/dist/l10n/th.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: { sans: ['Prompt', 'sans-serif'] },
+                    colors: { 'brand-orange': '#F97316', 'brand-dark': '#1F2937', 'brand-light': '#FFF7ED' },
+                    animation: { 'bounce-slow': 'bounce 3s infinite', 'fade-in': 'fadeIn 0.5s ease-out forwards' },
+                    keyframes: { fadeIn: { '0%': { opacity: '0', transform: 'translateY(-10px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } } }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body class="bg-gray-50 text-gray-800 font-sans antialiased">
+
+    <!-- Navbar -->
+    <nav class="fixed w-full z-50 transition-all duration-300 at-top" id="navbar">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <div class="flex-shrink-0 flex items-center gap-3 cursor-pointer group" onclick="window.scrollTo(0,0)">
+                    <div class="bg-white/10 p-2 rounded-xl backdrop-blur-sm group-hover:bg-white/20 transition-all">
+                        <i class="fa-solid fa-water text-3xl logo-icon transition-colors"></i>
+                    </div>
+                    <div class="flex flex-col">
+                        <div class="flex items-baseline gap-1">
+                            <h1 class="text-2xl font-bold leading-none logo-main-text transition-colors tracking-tight">พาเพลิน</h1>
+                            <span class="text-sm font-semibold text-brand-orange">แพเปียก</span>
+                        </div>
+                        <p class="text-[10px] uppercase tracking-wider logo-sub-text transition-colors font-medium">Pa Plearn Wet Rafting</p>
+                    </div>
+                </div>
+                <div class="hidden md:flex space-x-6 items-center">
+                    <a href="#services" class="nav-text font-medium hover:text-brand-orange transition-colors" data-i18n="nav_services">บริการ</a>
+                    <a href="#gallery" class="nav-text font-medium hover:text-brand-orange transition-colors" data-i18n="nav_gallery">บรรยากาศ</a>
+                    <a href="#contact" class="nav-text font-medium hover:text-brand-orange transition-colors" data-i18n="nav_contact">ติดต่อเรา</a>
+                    <div class="relative">
+                        <button onclick="toggleLangDropdown('desktop-lang-dropdown')" class="lang-btn-container flex items-center gap-2 px-4 py-2 rounded-full border transition-all duration-300 shadow-sm focus:outline-none focus:ring-2 focus:ring-brand-orange focus:ring-opacity-50">
+                            <img id="current-lang-icon" src="https://flagcdn.com/w40/th.png" alt="TH" class="w-5 h-auto rounded-sm shadow-sm object-cover">
+                            <span id="current-lang" class="uppercase text-sm font-bold tracking-wide">TH</span>
+                            <i class="fa-solid fa-chevron-down text-xs opacity-70"></i>
+                        </button>
+                        <div id="desktop-lang-dropdown" class="absolute right-0 top-full mt-2 w-40 bg-white rounded-2xl shadow-xl py-2 hidden border border-gray-100 overflow-hidden z-50 transform origin-top-right transition-all animate-fade-in">
+                            <button onclick="changeLanguage('th'); toggleLangDropdown('desktop-lang-dropdown')" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-orange-50 hover:text-brand-orange flex items-center gap-3 transition-colors border-b border-gray-50 last:border-0">
+                                <img src="https://flagcdn.com/w40/th.png" class="w-5 h-auto rounded-sm shadow-sm"><span class="font-medium">ภาษาไทย</span>
+                            </button>
+                            <button onclick="changeLanguage('en'); toggleLangDropdown('desktop-lang-dropdown')" class="w-full text-left px-4 py-3 text-sm text-gray-700 hover:bg-orange-50 hover:text-brand-orange flex items-center gap-3 transition-colors">
+                                <img src="https://flagcdn.com/w40/gb.png" class="w-5 h-auto rounded-sm shadow-sm"><span class="font-medium">English</span>
+                            </button>
+                        </div>
+                    </div>
+                    <a href="#booking" class="bg-brand-orange text-white px-6 py-2.5 rounded-full font-bold hover:bg-orange-600 transition shadow-lg hover:shadow-orange-200 transform hover:-translate-y-0.5 border border-transparent flex items-center gap-2">
+                        <i class="fa-regular fa-paper-plane"></i> <span data-i18n="nav_booking">ส่งคำขอจอง</span>
+                    </a>
+                </div>
+                <div class="md:hidden flex items-center gap-3">
+                    <button onclick="toggleLanguage()" class="menu-toggle-btn focus:outline-none transition-all duration-300 p-2 px-3 rounded-full bg-white/20 backdrop-blur-sm flex items-center gap-2 border border-transparent active:scale-95">
+                        <img id="mobile-lang-icon" src="https://flagcdn.com/w40/th.png" class="w-6 h-auto rounded-sm shadow-sm">
+                        <span class="text-sm font-bold tracking-wide" id="mobile-lang-text">TH</span>
+                    </button>
+                    <button id="mobile-menu-btn" class="menu-toggle-btn focus:outline-none transition-colors p-2">
+                        <i class="fa-solid fa-bars text-2xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        <div id="mobile-menu" class="hidden md:hidden bg-white shadow-xl absolute w-[94%] left-[3%] top-24 z-40 rounded-2xl border border-gray-100 overflow-hidden transform transition-all duration-300">
+            <div class="px-4 pt-2 pb-4 space-y-1">
+                <a href="#services" class="block px-3 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-brand-orange hover:bg-orange-50 transition-colors" data-i18n="nav_services">บริการ</a>
+                <a href="#gallery" class="block px-3 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-brand-orange hover:bg-orange-50 transition-colors" data-i18n="nav_gallery">บรรยากาศ</a>
+                <a href="#contact" class="block px-3 py-3 rounded-xl text-base font-medium text-gray-700 hover:text-brand-orange hover:bg-orange-50 transition-colors" data-i18n="nav_contact">ติดต่อเรา</a>
+                <div class="pt-3 pb-1">
+                    <a href="#booking" class="block w-full py-4 rounded-xl text-lg font-bold text-white bg-gradient-to-r from-brand-orange to-red-500 shadow-lg text-center transform active:scale-95 transition-all">
+                        <i class="fa-solid fa-paper-plane mr-2"></i> <span data-i18n="nav_booking">ส่งคำขอจองคิว</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero-bg h-screen min-h-[600px] flex items-center justify-center text-center px-4 relative">
+        <div class="max-w-4xl mx-auto text-white z-10 animate-fade-in-up">
+            <span class="inline-block py-1 px-3 rounded-full bg-white/20 backdrop-blur-sm text-sm font-medium mb-4 border border-white/30" data-i18n="hero_badge">🌊 เปิดประสบการณ์ใหม่ที่เชียงราย</span>
+            <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold mb-6 drop-shadow-lg leading-tight">
+                <span data-i18n="hero_title_1">สนุกสุดเหวี่ยงกับ</span><br><span class="text-brand-orange drop-shadow-md" data-i18n="hero_title_2">พาเพลินแพเปียก</span>
+            </h1>
+            <p class="text-lg md:text-xl text-gray-100 mb-10 font-light max-w-2xl mx-auto drop-shadow-md" data-i18n="hero_desc">ล่องแพเขื่อนแม่สรวย บรรยากาศดี อาหารอร่อย บริการเป็นกันเอง <br class="hidden md:block">เหมาะสำหรับครอบครัวและกลุ่มเพื่อน</p>
+            <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center items-center px-4 sm:px-0">
+                <a href="#booking" class="text-center bg-brand-orange text-white text-base sm:text-lg font-bold py-3 sm:py-3.5 px-8 sm:px-10 rounded-full shadow-2xl hover:bg-orange-600 transition transform hover:scale-105 min-w-[220px] sm:min-w-[250px]" data-i18n="btn_check_queue">เช็คคิวว่าง / จองแพ</a>
+                <a href="#services" class="text-center bg-white/10 backdrop-blur-md border border-white/50 text-white text-base sm:text-lg font-bold py-3 sm:py-3.5 px-8 sm:px-10 rounded-full hover:bg-white/20 transition min-w-[220px] sm:min-w-[250px]" data-i18n="btn_services">ดูราคาบริการ</a>
+            </div>
+        </div>
+        <div class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate-bounce">
+            <a href="#services" class="text-white/70 hover:text-white"><i class="fa-solid fa-chevron-down text-2xl"></i></a>
+        </div>
+    </header>
+
+    <!-- Services Section -->
+    <section id="services" class="py-24 bg-gray-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-20">
+                <span class="text-brand-orange font-bold tracking-wider uppercase text-sm mb-2 block" data-i18n="service_head_sm">Our Services</span>
+                <h2 class="text-3xl md:text-5xl font-bold text-brand-dark mb-6" data-i18n="service_head_lg">บริการและอัตราค่าบริการ</h2>
+                <div class="w-24 h-1.5 bg-gradient-to-r from-brand-orange to-orange-400 mx-auto rounded-full mb-6"></div>
+                <p class="text-gray-600 max-w-2xl mx-auto text-lg" data-i18n="service_desc">เลือกรูปแบบการพักผ่อนที่เหมาะกับคุณ ไม่ว่าจะมาเป็นคู่ ครอบครัว หรือกลุ่มใหญ่ เราพร้อมดูแลให้วันหยุดของคุณพิเศษที่สุด</p>
+            </div>
+            <div class="grid md:grid-cols-3 gap-10 mt-12">
+                <div class="group relative bg-white rounded-[2rem] p-8 pt-16 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:-translate-y-2 flex flex-col">
+                    <div class="absolute -top-10 left-1/2 transform -translate-x-1/2"><div class="w-20 h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-full flex items-center justify-center text-white text-3xl shadow-xl border-4 border-white group-hover:scale-110 transition-transform"><i class="fa-solid fa-ship"></i></div></div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center" data-i18n="raft_title">บริการล่องแพ</h3>
+                    <div class="text-center mb-6 border-b border-gray-100 pb-6">
+                        <div class="flex items-center justify-center gap-2"><span class="text-5xl font-extrabold text-blue-600">800</span><div class="text-left leading-tight"><span class="text-lg font-bold text-gray-600 block" data-i18n="baht">บาท</span><span class="text-xs text-gray-400" data-i18n="raft_pax_1">เหมา 1-6 ท่าน</span></div></div>
+                        <div class="mt-3 bg-blue-50 text-blue-700 text-sm py-1 px-3 rounded-full inline-block font-medium" data-i18n="raft_pax_2">120 บาท / ท่าน (7 ท่านขึ้นไป)</div>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-gray-600 flex-grow px-2">
+                        <li class="flex items-start"><div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0"><i class="fa-solid fa-check text-green-600 text-xs"></i></div><span data-i18n="raft_feat_1">บริการรับ-ส่งฟรี</span></li>
+                        <li class="flex items-start"><div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0"><i class="fa-solid fa-check text-green-600 text-xs"></i></div><span data-i18n="raft_feat_2">เล่นน้ำได้ไม่จำกัดเวลา</span></li>
+                        <li class="flex items-start bg-orange-50 p-3 rounded-xl border border-orange-100"><i class="fa-solid fa-child text-orange-500 mr-3 mt-1 text-lg"></i><span class="text-sm text-gray-700" data-i18n="raft_feat_3">เด็กเล็กความสูงไม่เกิน 110 ซม. <strong>ฟรี!!</strong> <br>(ต้องมีผู้ปกครองดูแล)</span></li>
+                    </ul>
+                </div>
+                <div class="group relative bg-white rounded-[2rem] p-8 pt-16 shadow-xl hover:shadow-2xl transition-all duration-300 border-2 border-brand-orange hover:-translate-y-3 flex flex-col z-10 md:-mt-4">
+                    <div class="absolute -top-10 left-1/2 transform -translate-x-1/2"><div class="w-20 h-20 bg-gradient-to-br from-orange-400 to-red-600 rounded-full flex items-center justify-center text-white text-3xl shadow-xl border-4 border-white group-hover:scale-110 transition-transform"><i class="fa-solid fa-utensils"></i></div></div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center" data-i18n="food_title">ชุดอาหารพื้นเมือง</h3>
+                    <div class="text-center mb-6 border-b border-gray-100 pb-6">
+                        <div class="flex items-center justify-center gap-2"><span class="text-3xl font-extrabold text-brand-orange" data-i18n="food_price">ราคาตามเมนู</span></div>
+                        <p class="text-gray-500 text-sm mt-2 px-4" data-i18n="food_desc">เซตอาหารเหนือ ลาบ ต้มยำ ปลาทอดสมุนไพรสดๆ พร้อมเครื่องดื่ม</p>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-gray-600 flex-grow px-2">
+                        <li class="flex items-center p-3 bg-green-50 rounded-xl border border-green-100"><i class="fa-solid fa-leaf text-green-500 mr-3 text-xl"></i><span class="font-medium text-green-800" data-i18n="food_feat_1">วัตถุดิบสดใหม่วันต่อวัน</span></li>
+                        <li class="flex items-center p-3 bg-red-50 rounded-xl border border-red-100"><i class="fa-solid fa-pepper-hot text-red-500 mr-3 text-xl"></i><span class="font-medium text-red-800" data-i18n="food_feat_2">รสชาติจัดจ้าน ดั้งเดิม</span></li>
+                    </ul>
+                </div>
+                <div class="group relative bg-white rounded-[2rem] p-8 pt-16 shadow-lg hover:shadow-2xl transition-all duration-300 border border-gray-100 hover:-translate-y-2 flex flex-col">
+                    <div class="absolute -top-10 left-1/2 transform -translate-x-1/2"><div class="w-20 h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-full flex items-center justify-center text-white text-3xl shadow-xl border-4 border-white group-hover:scale-110 transition-transform"><i class="fa-solid fa-umbrella-beach"></i></div></div>
+                    <h3 class="text-2xl font-bold text-gray-800 mb-4 text-center" data-i18n="hut_title">ซุ้มนั่งริมน้ำ</h3>
+                    <div class="text-center mb-6 border-b border-gray-100 pb-6">
+                        <div class="flex items-center justify-center gap-2"><span class="text-5xl font-extrabold text-green-600">200</span><div class="text-left leading-tight"><span class="text-lg font-bold text-gray-600 block" data-i18n="baht">บาท</span><span class="text-xs text-gray-400" data-i18n="hut_unit">ต่อวัน</span></div></div>
+                        <p class="text-gray-500 text-sm mt-2" data-i18n="hut_desc">นั่งพักผ่อนริมฝั่ง ชมวิวเขื่อนชิลๆ</p>
+                    </div>
+                    <ul class="space-y-4 mb-8 text-gray-600 flex-grow px-2">
+                        <li class="flex items-start"><div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0"><i class="fa-solid fa-clock text-green-600 text-xs"></i></div><span data-i18n="hut_feat_1">นั่งได้ตลอดทั้งวัน</span></li>
+                        <li class="flex items-start"><div class="w-6 h-6 rounded-full bg-green-100 flex items-center justify-center mr-3 mt-0.5 flex-shrink-0"><i class="fa-solid fa-bell-concierge text-green-600 text-xs"></i></div><span data-i18n="hut_feat_2">สั่งอาหารมาทานได้สะดวก</span></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="gallery" class="py-20 bg-white border-t border-gray-100">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-12">
+                <h2 class="text-3xl md:text-4xl font-bold text-brand-dark mb-4" data-i18n="gallery_head">บรรยากาศที่คุณจะหลงรัก</h2>
+                <div class="w-20 h-1.5 bg-brand-orange mx-auto rounded-full mb-4"></div>
+                <p class="text-gray-600" data-i18n="gallery_desc">สัมผัสความสดชื่นของสายน้ำและธรรมชาติที่สวยงาม</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 auto-rows-[250px]">
+                <div class="md:col-span-2 md:row-span-2 relative group rounded-3xl overflow-hidden cursor-pointer"><img src="https://i.postimg.cc/rFwVycWC/487877169_978501411103536_5302522303860833611_n.jpg" alt="Gallery" class="gallery-card w-full h-full object-cover"></div>
+                <div class="md:col-span-2 md:row-span-1 relative group rounded-3xl overflow-hidden cursor-pointer"><img src="https://i.postimg.cc/Ssf8LzHc/497862946_1303746595086358_2364917172122430173_n12.jpg" alt="Gallery" class="gallery-card w-full h-full object-cover"></div>
+                <div class="md:col-span-1 md:row-span-1 relative group rounded-3xl overflow-hidden cursor-pointer"><img src="https://i.postimg.cc/mgLwKQMq/skr-nch-xt-2026-01-19-143314.png" alt="Gallery" class="gallery-card w-full h-full object-cover"></div>
+                <div class="md:col-span-1 md:row-span-1 relative group rounded-3xl overflow-hidden cursor-pointer"><img src="https://i.postimg.cc/cJ6cL0Ff/skr-nch-xt-2026-01-19-135813.png" alt="Gallery" class="gallery-card w-full h-full object-cover"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Booking Section -->
+    <section id="booking" class="py-20 bg-brand-light relative overflow-hidden">
+        <div class="absolute top-0 right-0 -mr-20 -mt-20 w-96 h-96 bg-orange-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+        <div class="absolute bottom-0 left-0 -ml-20 -mb-20 w-96 h-96 bg-yellow-200 rounded-full mix-blend-multiply filter blur-3xl opacity-30"></div>
+        <div class="max-w-5xl mx-auto px-4 relative z-10">
+            <div class="bg-white rounded-3xl shadow-2xl overflow-hidden flex flex-col md:flex-row">
+                <div class="md:w-5/12 bg-brand-orange p-10 text-white flex flex-col relative overflow-hidden justify-between">
+                    <div class="absolute inset-0 bg-black/10"></div>
+                    <div class="relative z-10">
+                        <h2 class="text-3xl md:text-4xl font-extrabold mb-4 text-yellow-300 drop-shadow-md flex items-center gap-2"><i class="fa-solid fa-paper-plane text-2xl"></i><span data-i18n="booking_head">ส่งคำขอจองคิว</span></h2>
+                        <p class="text-orange-100 mb-8 leading-relaxed" data-i18n="booking_desc">เนื่องจากมีผู้สนใจจำนวนมาก เพื่อป้องกันคิวซ้ำซ้อน กรุณากรอกข้อมูลเพื่อให้เจ้าหน้าที่ตรวจสอบคิวว่างและติดต่อกลับครับ</p>
+                        <div class="p-6 bg-white/10 rounded-2xl border border-white/20 backdrop-blur-sm mb-6"><i class="fa-solid fa-shield-heart text-3xl mb-3 text-yellow-300"></i><h3 class="font-bold text-lg mb-1" data-i18n="booking_easy_title">จองง่าย จ่ายสะดวก</h3><p class="text-sm text-orange-100" data-i18n="booking_easy_desc">ทีมงานพร้อมดูแลและตอบกลับอย่างรวดเร็วเพื่อให้คุณได้วันพักผ่อนที่ดีที่สุด</p></div>
+                        <div class="p-6 bg-gradient-to-br from-green-400 to-teal-600 rounded-2xl border-2 border-green-200 shadow-lg transform rotate-0 hover:scale-[1.02] transition duration-300">
+                            <div class="flex items-center gap-4"><div class="bg-white/20 p-3 rounded-full backdrop-blur-sm"><i class="fa-solid fa-gift text-2xl text-white animate-bounce"></i></div><div><h3 class="font-bold text-xl text-white mb-0 text-shadow" data-i18n="promo_title">ฟรี ลำโพง Bluetooth</h3><p class="text-sm text-white/90 mt-1" data-i18n="promo_desc">สำหรับทุกการจอง ให้คุณสนุกได้เต็มที่</p></div></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:w-7/12 p-8 md:p-10">
+                    <form id="bookingForm" class="space-y-6">
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div><label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="label_name">ชื่อผู้จอง</label><div class="relative"><i class="fa-regular fa-user absolute left-4 top-3.5 text-gray-400"></i><input type="text" id="name" required class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-orange-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-orange focus:border-transparent outline-none transition" data-i18n-ph="ph_name" placeholder="ระบุชื่อของคุณ"></div></div>
+                            <div><label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="label_phone">เบอร์โทรศัพท์</label><div class="relative"><i class="fa-solid fa-phone absolute left-4 top-3.5 text-gray-400"></i><input type="tel" id="phone" required class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-orange-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-orange focus:border-transparent outline-none transition" data-i18n-ph="ph_phone" placeholder="กรอกเบอร์มือถือ 10 หลัก (เฉพาะตัวเลข)" maxlength="10" oninput="this.value = this.value.replace(/[^0-9]/g, '')"></div></div>
+                        </div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="label_email">Email (ถ้ามี)</label><div class="relative"><i class="fa-regular fa-envelope absolute left-4 top-3.5 text-gray-400"></i><input type="email" id="email" class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-orange-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-orange focus:border-transparent outline-none transition" data-i18n-ph="ph_email" placeholder="กรอกอีเมลของคุณ"></div></div>
+                        <div class="grid md:grid-cols-2 gap-6">
+                            <div><label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="label_date">วันที่ต้องการจอง</label><div class="relative"><i class="fa-regular fa-calendar absolute left-4 top-3.5 text-gray-400"></i><input type="text" id="date" required class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-orange-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-orange focus:border-transparent outline-none transition bg-white" data-i18n-ph="ph_date" placeholder="เลือกวันที่..."></div></div>
+                            <div><label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="label_pax">จำนวนคน</label><div class="relative"><i class="fa-solid fa-users absolute left-4 top-3.5 text-gray-400"></i><input type="number" id="guestCount" min="1" required class="w-full pl-11 pr-4 py-3 bg-gray-50 border border-orange-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-orange focus:border-transparent outline-none transition" data-i18n-ph="ph_pax" placeholder="ระบุจำนวน (ท่าน)"></div><p class="text-[10px] text-green-600 mt-1 font-bold" data-i18n="label_child">*เด็กเล็กความสูงไม่เกิน 110 ซม. ฟรี!! (ต้องมีผู้ปกครองดูแล)</p></div>
+                        </div>
+                        <div class="bg-gradient-to-br from-gray-50 to-orange-50/30 p-6 rounded-2xl border border-gray-200 shadow-sm mt-6">
+                            <div class="flex items-center justify-between bg-white p-4 rounded-xl border border-gray-100 shadow-sm">
+                                <div class="flex items-center gap-3">
+                                    <div class="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-brand-orange">
+                                        <i class="fa-solid fa-calculator"></i>
+                                    </div>
+                                    <div>
+                                        <span class="text-gray-600 text-sm font-medium block" data-i18n="total_label">ยอดรวม</span>
+                                        <div id="selectedPeriodDisplay" class="hidden text-xs text-brand-orange font-medium mt-0.5"></div>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <span id="totalPriceDisplay" class="text-3xl font-extrabold text-brand-orange">800</span>
+                                    <span class="text-sm text-gray-500 font-medium ml-1" data-i18n="baht">บาท</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="mt-6">
+                            <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center gap-2"><i class="fa-regular fa-clock text-brand-orange"></i><span data-i18n="label_time">เลือกช่วงเวลาที่คุณต้องการ</span><span class="text-red-500 text-sm">*</span></h3>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                <div><label class="cursor-pointer relative group block h-full"><input type="radio" name="time_slot_main" value="morning" class="peer sr-only time-card-input" onchange="showTimeSlots('morning')"><div class="time-card p-4 rounded-xl border-2 border-gray-200 hover:border-orange-300 transition-all duration-200 h-full flex flex-col justify-center items-center text-center"><div class="bg-blue-100 text-blue-600 w-10 h-10 rounded-full flex items-center justify-center mb-2"><i class="fa-regular fa-sun text-lg"></i></div><div class="check-icon absolute top-3 right-3 w-6 h-6 bg-brand-orange rounded-full text-white flex items-center justify-center opacity-0 transform scale-0 transition-all duration-200"><i class="fa-solid fa-check text-xs"></i></div><span class="block font-bold text-gray-800 text-lg" data-i18n="time_am_title">รอบเช้า</span><span class="block text-xs text-gray-500 mb-1" data-i18n="time_am_desc">บรรยากาศสดชื่น</span><span class="block font-semibold text-brand-orange">09:00 - 12:00</span></div></label></div>
+                                <div><label class="cursor-pointer relative group block h-full"><input type="radio" name="time_slot_main" value="afternoon" class="peer sr-only time-card-input" onchange="showTimeSlots('afternoon')"><div class="time-card p-4 rounded-xl border-2 border-gray-200 hover:border-orange-300 transition-all duration-200 h-full flex flex-col justify-center items-center text-center"><div class="bg-orange-100 text-orange-600 w-10 h-10 rounded-full flex items-center justify-center mb-2"><i class="fa-solid fa-cloud-sun text-lg"></i></div><div class="check-icon absolute top-3 right-3 w-6 h-6 bg-brand-orange rounded-full text-white flex items-center justify-center opacity-0 transform scale-0 transition-all duration-200"><i class="fa-solid fa-check text-xs"></i></div><span class="block font-bold text-gray-800 text-lg" data-i18n="time_pm_title">รอบบ่าย</span><span class="block text-xs text-gray-500 mb-1" data-i18n="time_pm_desc">แดดร่มลมตก</span><span class="block font-semibold text-brand-orange">13:00 - 18:00</span></div></label></div>
+                            </div>
+                            <div id="morning-slots" class="hidden mt-4 bg-blue-50/50 p-4 rounded-xl border border-blue-100 animate-fade-in"><p class="text-sm text-blue-800 font-medium mb-3" data-i18n="select_time_slot">เลือกรอบเวลา:</p><div class="flex flex-wrap gap-2" id="morning-chips-container"></div></div>
+                            <div id="afternoon-slots" class="hidden mt-4 bg-orange-50/50 p-4 rounded-xl border border-orange-100 animate-fade-in"><p class="text-sm text-orange-800 font-medium mb-3" data-i18n="select_time_slot">เลือกรอบเวลา:</p><div class="flex flex-wrap gap-2" id="afternoon-chips-container"></div></div>
+                        </div>
+                        <div><label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="label_note">หมายเหตุเพิ่มเติม (ถ้ามี)</label><textarea id="note" rows="3" class="w-full p-4 bg-gray-50 border border-orange-200 rounded-xl focus:bg-white focus:ring-2 focus:ring-brand-orange focus:border-transparent outline-none transition" data-i18n-ph="ph_note" placeholder="เช่น อาหารที่แพ้อื่นๆ, ช่วงเวลาที่สะดวกรับสาย"></textarea></div>
+                                                <div class="flex items-start gap-3 mt-4"><input type="checkbox" id="pdpaConsent" class="mt-1 w-4 h-4 text-brand-orange focus:ring-brand-orange border-gray-300 rounded"><label for="pdpaConsent" class="text-sm text-gray-600"><span data-i18n="accept_pdpa">ข้าพเจ้ายอมรับ</span> <button type="button" onclick="openModal('termsModal')" class="text-brand-orange underline font-medium" data-i18n="terms_link">เงื่อนไข</button> <span data-i18n="and_text">และ</span> <button type="button" onclick="openModal('pdpaModal')" class="text-brand-orange underline font-medium" data-i18n="pdpa_link">นโยบายความเป็นส่วนตัว (PDPA)</button></label></div>
+                        <button type="submit" id="submitBtn" class="w-full mt-6 bg-gradient-to-r from-brand-orange to-red-500 text-white py-4 rounded-2xl font-bold text-lg shadow-xl hover:shadow-2xl hover:from-orange-600 hover:to-red-600 transition-all transform hover:-translate-y-0.5 active:scale-[0.98] flex items-center justify-center gap-3"><i class="fa-solid fa-paper-plane"></i><span data-i18n="btn_submit_booking">ส่งข้อมูลการจอง (รอเจ้าหน้าที่ยืนยัน)</span></button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer id="contact" class="bg-brand-dark text-white py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid md:grid-cols-3 gap-8">
+                <div>
+                    <div class="flex items-center gap-3 mb-6">
+                        <i class="fa-solid fa-water text-3xl text-brand-orange"></i>
+                        <div>
+                            <h3 class="text-xl font-bold">พาเพลิน<span class="text-brand-orange">แพเปียก</span></h3>
+                            <p class="text-xs text-gray-400 uppercase tracking-wider">Pa Plearn Wet Rafting</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 text-sm leading-relaxed" data-i18n="footer_desc">
+                        สัมผัสบรรยากาศธรรมชาติ ล่องแพสุดมันส์ อาหารอร่อย ณ เขื่อนแม่สรวย เชียงราย พร้อมบริการที่เป็นกันเอง
+                    </p>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-address-book text-brand-orange"></i>
+                        <span data-i18n="footer_contact">ติดต่อเรา</span>
+                    </h3>
+                    <div class="space-y-4">
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-green-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-phone text-white"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-sm text-gray-300" data-i18n="contact_phone">เบอร์โทรติดต่อ</p>
+                                <a href="tel:0812345678" class="text-xl font-bold text-white hover:text-brand-orange transition">098-808-2094</a>
+                                <p class="text-xs text-gray-500" data-i18n="contact_phone_sub">สอบถามเพิ่มเติมได้ตลอดเวลา</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-blue-600 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-solid fa-location-dot text-white"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-sm text-gray-300" data-i18n="contact_loc">สถานที่ตั้ง</p>
+                                <p class="text-white font-medium" data-i18n="contact_loc_val">เขื่อนแม่สรวย จ.เชียงราย</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start gap-3">
+                            <div class="w-10 h-10 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                                <i class="fa-brands fa-facebook-f text-white"></i>
+                            </div>
+                            <div>
+                                <p class="font-medium text-sm text-gray-300" data-i18n="contact_fb">Facebook</p>
+                                <a href="https://www.facebook.com/profile.php?id=100083349563712" target="_blank" class="text-white font-medium hover:text-brand-orange transition" data-i18n="contact_fb_val">พาเพลินแพเปียก</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="text-lg font-bold mb-6 flex items-center gap-2">
+                        <i class="fa-solid fa-map text-brand-orange"></i>
+                        <span data-i18n="footer_map">แผนที่เดินทาง</span>
+                    </h3>
+                    <div class="rounded-2xl overflow-hidden border border-gray-700 shadow-lg">
+                        <iframe src="https://maps.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3764.123456789!2d99.539056!3d19.679393!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDQwJzQ1LjgiTiA5OcKzMInMjAuNiJF!5e0!3m2!1sth!2sth!4v1&t=k" width="100%" height="180" style="border:0;" allowfullscreen="" loading="lazy" class="opacity-80 hover:opacity-100 transition-opacity"></iframe>
+                    </div>
+                    <a href="https://maps.google.com/?q=19.679393,99.539056" target="_blank" class="mt-3 inline-flex items-center px-4 py-2 bg-gray-800 border border-gray-700 rounded-full hover:bg-brand-orange hover:border-brand-orange text-center text-brand-orange hover:text-white transition text-sm font-medium">
+                        <i class="fa-solid fa-map-location-dot mr-2"></i>
+                        <span data-i18n="open_map">เปิดใน Google Maps</span>
+                    </a>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 pt-8 mt-12 text-sm text-gray-500 flex flex-col md:flex-row justify-between items-center gap-4">
+                <div class="order-2 md:order-1">
+                    &copy; <span id="year"></span> Pa Plearn Wet Rafting. <span data-i18n="copyright">สงวนลิขสิทธิ์.</span>
+                </div>
+                <div class="order-1 md:order-2 flex flex-wrap justify-center gap-3">
+                    <button onclick="openModal('pdpaModal')" class="flex items-center gap-2 px-4 py-2 bg-gray-800 border border-gray-700 rounded-full hover:bg-gray-700 hover:text-white transition text-xs text-gray-400">
+                        <i class="fa-solid fa-shield-halved text-green-500"></i>
+                        <span data-i18n="footer_pdpa">นโยบาย PDPA</span>
+                    </button>
+                    <button onclick="openModal('termsModal')" class="flex items-center gap-2 px-4 py-2 bg-gray-800 border border-gray-700 rounded-full hover:bg-gray-700 hover:text-white transition text-xs text-gray-400">
+                        <i class="fa-solid fa-file-contract text-blue-400"></i>
+                        <span data-i18n="footer_terms">เงื่อนไข</span>
+                    </button>
+                    <button onclick="openModal('cancelModal')" class="flex items-center gap-2 px-4 py-2 bg-gray-800 border border-gray-700 rounded-full hover:bg-red-900/30 hover:border-red-900 hover:text-red-400 transition text-xs group text-gray-400">
+                        <i class="fa-solid fa-circle-xmark text-red-500 group-hover:text-red-400"></i>
+                        <span data-i18n="footer_cancel">แจ้งยกเลิก</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- PDPA Modal -->
+    <div id="pdpaModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"><div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl modal-content max-h-[90vh] flex flex-col"><div class="bg-gradient-to-r from-green-500 to-teal-600 text-white p-6 rounded-t-3xl"><h3 class="text-2xl font-bold flex items-center gap-3"><i class="fa-solid fa-shield-halved"></i><span data-i18n="modal_pdpa_title">นโยบายความเป็นส่วนตัว (PDPA)</span></h3></div><div class="p-6 overflow-y-auto text-sm text-gray-600 leading-relaxed" id="pdpaContent"></div><div class="bg-gray-50 px-6 py-4 flex justify-end border-t rounded-b-3xl"><button onclick="closeModal('pdpaModal')" class="bg-green-500 hover:bg-green-600 text-white px-6 py-3 rounded-2xl font-medium transition" data-i18n="btn_acknowledge">รับทราบ</button></div></div></div>
+
+    <!-- Terms Modal -->
+    <div id="termsModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"><div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl modal-content max-h-[90vh] flex flex-col"><div class="bg-gradient-to-r from-blue-500 to-indigo-600 text-white p-6 rounded-t-3xl"><h3 class="text-2xl font-bold flex items-center gap-3"><i class="fa-solid fa-file-contract"></i><span data-i18n="modal_terms_title">ข้อกำหนดและเงื่อนไข</span></h3></div><div class="p-6 overflow-y-auto text-sm text-gray-600 leading-relaxed" id="termsContent"></div><div class="bg-gray-50 px-6 py-4 flex justify-end border-t rounded-b-3xl"><button onclick="closeModal('termsModal')" class="bg-blue-500 hover:bg-blue-600 text-white px-6 py-3 rounded-2xl font-medium transition" data-i18n="btn_acknowledge">รับทราบ</button></div></div></div>
+
+    <!-- Cancel Modal -->
+    <div id="cancelModal" class="fixed inset-0 bg-black bg-opacity-50 z-50 hidden flex items-center justify-center p-4"><div class="bg-white rounded-3xl max-w-lg w-full shadow-2xl modal-content"><div class="bg-gradient-to-r from-red-500 to-pink-600 text-white p-6 rounded-t-3xl"><h3 class="text-2xl font-bold flex items-center gap-3"><i class="fa-solid fa-circle-xmark"></i><span data-i18n="modal_cancel_title">แจ้งยกเลิกการจอง</span></h3></div><div class="p-6"><p class="text-gray-600 mb-6" data-i18n="modal_cancel_desc">กรุณาระบุข้อมูลการจองที่ต้องการยกเลิก เจ้าหน้าที่จะตรวจสอบและติดต่อกลับ</p><form id="cancelForm" class="space-y-4"><div><label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="label_name">ชื่อผู้จอง</label><input type="text" id="cancelName" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:bg-white focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition"></div><div><label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="label_phone">เบอร์โทรศัพท์</label><input type="tel" id="cancelPhone" required class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:bg-white focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition"></div><div><label class="block text-sm font-medium text-gray-700 mb-2" data-i18n="ph_cancel_reason">สาเหตุการยกเลิก</label><select id="cancelReason" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:bg-white focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition"><option value="" data-i18n="reason_default">กรุณาเลือกเหตุผล...</option><option value="urgent" data-i18n="reason_urgent">ติดธุระด่วน / ป่วย</option><option value="weather" data-i18n="reason_weather">สภาพอากาศไม่เอื้ออำนวย</option><option value="change_plan" data-i18n="reason_change_plan">เปลี่ยนแผนการเดินทาง</option><option value="inconvenient" data-i18n="reason_inconvenient">ไม่สะดวกเดินทาง</option><option value="wrong" data-i18n="reason_wrong">จองผิดวัน / เวลา</option><option value="other" data-i18n="reason_other">อื่นๆ</option></select></div><div id="otherReasonDiv" class="hidden"><label class="block text-sm font-medium text-gray-700 mb-2">ระบุสาเหตุอื่นๆ</label><textarea id="otherReasonText" rows="3" class="w-full px-4 py-3 bg-gray-50 border border-gray-300 rounded-xl focus:bg-white focus:ring-2 focus:ring-red-500 focus:border-transparent outline-none transition" placeholder="กรุณาระบุสาเหตุการยกเลิก..."></textarea></div></form></div><div class="bg-gray-50 px-6 py-4 flex gap-3 justify-end border-t rounded-b-3xl"><button onclick="closeModal('cancelModal')" class="px-6 py-3 border border-gray-300 text-gray-700 rounded-2xl hover:bg-gray-100 transition font-medium flex items-center gap-2 group"><i class="fa-regular fa-times-circle group-hover:scale-110 transition-transform"></i><span data-i18n="btn_close_window">ปิดหน้าต่าง</span></button><button id="submitCancel" class="bg-red-500 hover:bg-red-600 text-white px-6 py-3 rounded-2xl font-medium transition shadow-lg hover:shadow-red-500/25 flex items-center gap-2 group"><i class="fa-solid fa-paper-plane group-hover:translate-x-1 transition-transform"></i><span data-i18n="btn_submit_cancel_request">ส่งเรื่องขอยกเลิก</span></button></div></div></div>
+
+    <script src="app.js"></script>
+</body>
+</html>
